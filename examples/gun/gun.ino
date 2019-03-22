@@ -13,6 +13,7 @@ bool isTrigger(){
     if (digitalRead(GUN_TRIGGER_PIN) == 0){
         if (flagCheck == false){
             flagCheck = true;
+            delay(50);
             return true;
         }else{
             return false;
