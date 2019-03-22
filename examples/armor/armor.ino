@@ -1,8 +1,5 @@
 #include <LaserGunProjectLab.h>
 
-#define GUN_TRIGGER_PIN 2
-
-#define DAMAGE      10
 #define ID          2
 
 #define LED_LIFE 13

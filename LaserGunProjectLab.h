@@ -28,7 +28,6 @@ private:
     
 public:
     LaserGunProjectLab(TypeFunction type);
-    ~LaserGunProjectLab();
 
     void handle();
     void shootGun(uint32_t bullet);

@@ -18,7 +18,6 @@ bool isTrigger(){
         }else{
             return false;
         }
-        
     }else{
         flagCheck = false;
         return false;
