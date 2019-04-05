@@ -1,8 +1,7 @@
 #include <LaserGunProjectLab.h>
 
 #define ID          2
-
-#define LED_LIFE 13
+#define LED_LIFE    13
 
 LaserGunProjectLab armor(ARMOR);
 int life = 100;
@@ -11,6 +10,8 @@ void onDataReceive(uint8_t id,uint8_t damage){
     if (id != ID){
         life = life - damage;
     }
+    Serial.print("life is ");
+    Serial.println(life);
 }
 
 void setup(){

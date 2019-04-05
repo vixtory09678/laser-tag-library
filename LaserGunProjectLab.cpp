@@ -2,7 +2,6 @@
 
 LaserGunProjectLab::LaserGunProjectLab(TypeFunction type)
     :_type(type),_recv(IR_RECV_PIN){
-
 }
 
 void LaserGunProjectLab::setOnDataReceive(CALLBACK){

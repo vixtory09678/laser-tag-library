@@ -8,9 +8,9 @@
 LaserGunProjectLab gun(GUN);
 long bullet;
 
-bool isTrigger(){
+bool isTrigger(int trigPin){
     static bool flagCheck = false;
-    if (digitalRead(GUN_TRIGGER_PIN) == 0){
+    if (digitalRead(trigPin) == 0){
         if (flagCheck == false){
             flagCheck = true;
             delay(50);
