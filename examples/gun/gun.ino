@@ -32,7 +32,7 @@ void setup(){
 }
 
 void loop(){
-    if (isTrigger()){
+    if (isTrigger(GUN_TRIGGER_PIN)){
         gun.shootGun(bullet);
     }
 }
