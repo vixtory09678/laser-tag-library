@@ -1,10 +1,23 @@
 #include <LaserGunProjectLab.h>
+#include <Adafruit_NeoPixel.h>
+
+#define PIN_LED 5
+#define NUM_LED 24
+
+Adafruit_NeoPixel pixel = Adafruit_NeoPixel(NUM_LED, PIN_LED, NEO_GRB + NEO_KHZ800);
 
 #define ID          2
 #define LED_LIFE    13
 
 LaserGunProjectLab armor(ARMOR);
 int life = 100;
+
+void setLedColor(int r, int g, int b) {
+    for (int i = 0; i < NUM_LED; i++) {
+        pixel.setPixelColor(i, pixel.Color(r,g,b));
+        pixel.show();
+    }
+}
 
 void onDataReceive(uint8_t id,uint8_t damage){
     if (id != ID){
@@ -16,17 +29,26 @@ void onDataReceive(uint8_t id,uint8_t damage){
 
 void setup(){
     Serial.begin(9600);
+    pixel.begin();
+    pixel.setBrightness(150); // length 0-255
     armor.setOnDataReceive(onDataReceive);
     pinMode(LED_LIFE,OUTPUT);
+
+    delay(1000);
+    setLedColor(255,0,0);
+    
 }
 
 void loop(){
     armor.handle();
 
     if (life <= 0){
+        
         digitalWrite(LED_LIFE,LOW);
+        setLedColor(0,0,0); // die
         delay(3000);
         digitalWrite(LED_LIFE,HIGH);
+        setLedColor(255,0,0); // reborn
         life = 100;
     }
 }
