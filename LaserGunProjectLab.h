@@ -1,3 +1,6 @@
+// LaserGunProjectLab - robotics-za.blogspot.com
+// Copyright Wannachat Surasiang 2019
+
 #ifndef LASER_GUN_PROJECT_LAB_H
 #define LASER_GUN_PROJECT_LAB_H
 
@@ -16,8 +19,15 @@ enum TypeFunction{
 
 class LaserGunProjectLab
 {
+public:
+    LaserGunProjectLab(TypeFunction type);
+    void handle();
+    void shootGun(uint32_t bullet);
+    uint32_t enPacket(uint8_t id, uint8_t damage);
+    bool isReceiveIR();
+    void setOnDataReceive(CALLBACK);
+
 private:
-    /* data */
     IRrecv _recv;
     IRsend _send;
     decode_results results;
@@ -25,15 +35,6 @@ private:
     TypeFunction _type;
     void (*callback)(uint8_t id,uint8_t damage);
     void dePacket();
-    
-public:
-    LaserGunProjectLab(TypeFunction type);
-
-    void handle();
-    void shootGun(uint32_t bullet);
-    uint32_t enPacket(uint8_t id, uint8_t damage);
-    bool isReceiveIR();
-    void setOnDataReceive(CALLBACK);
 };
 
 #endif

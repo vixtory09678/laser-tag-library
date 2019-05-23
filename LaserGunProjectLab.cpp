@@ -1,3 +1,5 @@
+// LaserGunProjectLab - robotics-za.blogspot.com
+// Copyright Wannachat Surasiang 2019
 #include "LaserGunProjectLab.h"
 
 LaserGunProjectLab::LaserGunProjectLab(TypeFunction type)
@@ -19,8 +21,8 @@ void LaserGunProjectLab::shootGun(uint32_t data){
 uint32_t LaserGunProjectLab::enPacket(uint8_t id,uint8_t damage){
     if (_type != GUN) return;
 
-    id = (id > 7) ? (id % 7) : (id < 0) ? 0 : id;
-	damage = (damage > 15) ? (damage % 15) : (damage < 0) ? 0 : damage;
+    id = (id > 7) ? (id % 8) : (id < 0) ? 0 : id;
+	damage = (damage > 15) ? (damage % 16) : (damage < 0) ? 0 : damage;
 
 	uint32_t data = ((uint32_t)id << 12) | ((uint32_t)damage << 8);
 	data |= (~(id+damage)) & 0xFF;
