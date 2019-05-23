@@ -6,13 +6,11 @@
 DFRobotDFPlayerMini player;
 SoftwareSerial mSerial(10, 11); // rx tx
 
-typedef enum Media{
-    REBORN = 1,
-    DEAD = 2,
-    ATTACKED = 3
-}MusicName;
 
-MusicName sound = REBORN;
+#define ATTACKED 2
+#define REBORN 1
+#define ATTACKED2 3
+
 
 #define PIN_LED 5
 #define NUM_LED 24
@@ -47,7 +45,7 @@ void onDataReceive(uint8_t id,uint8_t damage){
 
     setLedColor(0,0,0);
     for (int i = 0; i < ledCount; i++){
-        setLedColor(i,255,0,0);
+        setLedColor(i,255,255,0);
     }
 
     player.play(ATTACKED);
@@ -61,6 +59,7 @@ void setup(){
 
     pixel.begin();
     pixel.setBrightness(150); // length 0-255
+    setLedColor(0,0,0);
 
     // set media player
     if (!player.begin(mSerial) ){
@@ -81,22 +80,21 @@ void setup(){
     armor.setOnDataReceive(onDataReceive);
 
     pinMode(LED_LIFE,OUTPUT);
-    delay(1000);
     player.play(REBORN);
-    setLedColor(255,0,0);
+    delay(5200);
+    setLedColor(255,255,0);
 }
 
 void loop(){
     armor.handle();
 
     if (life <= 0){
-        digitalWrite(LED_LIFE,LOW);
-        player.play(DEAD);
-        setLedColor(0,0,0); // die
-        delay(3000);
-        digitalWrite(LED_LIFE,HIGH);
+        digitalWrite(LED_LIFE, LOW);
         player.play(REBORN);
-        setLedColor(255,0,0); // reborn
+        setLedColor(0,0,0); // die
+        delay(5200);
+        digitalWrite(LED_LIFE, HIGH);
+        setLedColor(255,255,0); // reborn
         life = 100;
     }
 }
