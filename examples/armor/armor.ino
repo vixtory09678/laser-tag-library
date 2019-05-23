@@ -19,10 +19,25 @@ void setLedColor(int r, int g, int b) {
     }
 }
 
+void setLedColor(int num_led, int r, int g, int b) {
+    for (int i = 0; i < num_led; i++) {
+        pixel.setPixelColor(i, pixel.Color(r,g,b));
+        pixel.show();
+    }
+}
+
 void onDataReceive(uint8_t id,uint8_t damage){
     if (id != ID){
         life = life - damage;
     }
+
+   int ledCount =  map(life,0,100,0,24); // 0 - 24
+
+    setLedColor(0,0,0);
+   for (int i = 0; i < ledCount; i++){
+       setLedColor(i,255,0,0);
+   }
+
     Serial.print("life is ");
     Serial.println(life);
 }
@@ -33,10 +48,8 @@ void setup(){
     pixel.setBrightness(150); // length 0-255
     armor.setOnDataReceive(onDataReceive);
     pinMode(LED_LIFE,OUTPUT);
-
     delay(1000);
     setLedColor(255,0,0);
-    
 }
 
 void loop(){
