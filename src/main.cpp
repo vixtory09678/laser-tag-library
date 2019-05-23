@@ -51,7 +51,6 @@ void onDataReceive(uint8_t id,uint8_t damage){
     }
 
     player.play(ATTACKED);
-
     Serial.print("life is ");
     Serial.println(life);
 }
