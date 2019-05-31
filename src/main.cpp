@@ -5,17 +5,23 @@
 
 #define USE_DELAY_SHOOT
 
+// declear DFPlayer module music
 DFRobotDFPlayerMini player;
-SoftwareSerial mSerial(10, 11); // rx tx
+SoftwareSerial mSerial(10, 11);             // rx tx
 
-#define GUN_TRIGGER_PIN 2
+// declear pin
+#define GUN_TRIGGER_PIN         2           //connect trigger
+#define GUN_LASER_POINT_PIN     7           //connect laser
 
-#define DAMAGE      10
-#define ID          1
+// declear constance variable
+#define DAMAGE                  10          // set damage   0-15
+#define ID                      1           // set id       0 - 7
 
+// declear Main library LaserGunProjectlab
 LaserGunProjectLab gun(GUN);
-long bullet;
+long bullet = 0;
 
+// this function will be one shot pressed from the switch button and return true if button press and return false if button release
 bool isTrigger(int trigPin){
     static bool flagCheck = false;
     if (digitalRead(trigPin) == 0){
@@ -33,8 +39,11 @@ bool isTrigger(int trigPin){
 }
 
 long loopTime = 0;
+
 void setup(){
+    // setup serial communication for communicate between Hardware and Computer
     Serial.begin(9600);
+    // setup software serial communication for communicate between Hardware and DFPlayer
     mSerial.begin(9600);
 
     // set media player
@@ -49,12 +58,14 @@ void setup(){
             delay(100);
         }
     }
+    // if success initialize
     Serial.println(F("DFPlayer online!!"));
     player.volume(25);
 
     // fill bullet
     bullet = gun.enPacket(ID,DAMAGE);
     pinMode(GUN_TRIGGER_PIN, INPUT);
+    pinMode(GUN_LASER_POINT_PIN, OUTPUT);
     loopTime = millis();
 }
 
@@ -64,13 +75,17 @@ void loop(){
         #ifdef USE_DELAY_SHOOT
         long now = millis();
         if (now - loopTime > 100){
+            digitalWrite(GUN_LASER_POINT_PIN, HIGH);
             gun.shootGun(bullet);
             player.play(1);
+            digitalWrite(GUN_LASER_POINT_PIN, LOW);
             loopTime = now;
         }
         #else
+        digitalWrite(GUN_LASER_POINT_PIN, HIGH);
         gun.shootGun(bullet);
         player.play(1);
+        digitalWrite(GUN_LASER_POINT_PIN, LOW);
         #endif
     }
 }
