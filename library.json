@@ -1,0 +1,24 @@
+{
+  "name": "LaserTagLibrary",
+  "version": "1.0.0",
+  "description": "A Simple library for creating LaserTag game",
+  "keywords": "platformio, laser_tag, ir",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vixtory09678/laser-tag-library.git"
+  },
+  "authors": [
+    {
+      "name": "Wannachat Surasiang",
+      "email": "wannachat.sur@gmail.com",
+      "url": "https://iamteam.me/portfolio-1af0bf0bab0b"
+    }
+  ],
+  "license": "MIT",
+  "homepage": "iamteam.me",
+  "dependencies": {
+    "z3t0/IRremote": "^4.1.2"
+  },
+  "frameworks": "*",
+  "platforms": "*"
+}

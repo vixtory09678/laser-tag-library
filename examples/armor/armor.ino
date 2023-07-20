@@ -57,7 +57,6 @@ void loop() {
   armor.handle();
 
   if (life <= 0) {
-
     digitalWrite(LED_LIFE, LOW);
     setLedColor(0, 0, 0); // die
     delay(3000);
