@@ -1,5 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-#include <LaserGunProjectLab.h>
+#include <LaserTagSimple.h>
 
 #define PIN_LED 5
 #define NUM_LED 24
@@ -10,7 +10,7 @@ Adafruit_NeoPixel pixel =
 #define ID 2
 #define LED_LIFE 13
 
-LaserGunProjectLab armor(ARMOR);
+LaserTagSimple::Armor armor;
 int life = 100;
 
 void setLedColor(int r, int g, int b) {

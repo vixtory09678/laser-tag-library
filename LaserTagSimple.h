@@ -1,11 +1,11 @@
-// LaserGunProjectLab - iamteam.com
+// LaserTagSimple - iamteam.com
 // Copyright Wannachat Surasiang 2019
 
 #ifndef LASER_GUN_PROJECT_LAB_H
 #define LASER_GUN_PROJECT_LAB_H
 
 #include <Arduino.h>
-#include <IRremote.h>
+#include <IRremote.hpp>
 
 #define CALLBACK void (*func)(uint8_t id, uint8_t damage)
 #define IR_PIN 3
@@ -13,23 +13,24 @@
 
 enum TypeFunction { GUN, ARMOR };
 
-class LaserGunProjectLab {
+namespace LaserTagSimple {
+class Gun {
 public:
-  LaserGunProjectLab(TypeFunction type);
-  void handle();
   void shoot(uint32_t bullet);
   uint32_t enPacket(uint8_t id, uint8_t damage);
+};
+
+class Armor {
+public:
+  Armor();
+  void handle();
   bool isReceiveIR();
   void setOnDataReceive(CALLBACK);
 
 private:
-  IRrecv _recv;
-  IRsend _send;
-  decode_results results;
-
-  TypeFunction _type;
   void (*callback)(uint8_t id, uint8_t damage);
   void dePacket();
 };
+} // namespace LaserTagSimple
 
 #endif

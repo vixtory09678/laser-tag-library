@@ -1,11 +1,11 @@
-#include <LaserGunProjectLab.h>
+#include <LaserTagSimple.h>
 
 #define GUN_TRIGGER_PIN 2
 
 #define DAMAGE 10
 #define ID 1
 
-LaserGunProjectLab gun(GUN);
+LaserTagSimple::Gun gun;
 long bullet;
 
 bool isTrigger(int trigPin) {
@@ -33,6 +33,6 @@ void setup() {
 
 void loop() {
   if (isTrigger(GUN_TRIGGER_PIN)) {
-    gun.shootGun(bullet);
+    gun.shoot(bullet);
   }
 }
