@@ -17,7 +17,7 @@ class LaserGunProjectLab {
 public:
   LaserGunProjectLab(TypeFunction type);
   void handle();
-  void shootGun(uint32_t bullet);
+  void shoot(uint32_t bullet);
   uint32_t enPacket(uint8_t id, uint8_t damage);
   bool isReceiveIR();
   void setOnDataReceive(CALLBACK);

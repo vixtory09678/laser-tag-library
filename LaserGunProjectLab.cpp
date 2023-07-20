@@ -12,7 +12,7 @@ void LaserGunProjectLab::setOnDataReceive(CALLBACK) {
   }
 }
 
-void LaserGunProjectLab::shootGun(uint32_t data) {
+void LaserGunProjectLab::shoot(uint32_t data) {
   if (_type != GUN)
     return;
   _send.sendSony(data, 16);
@@ -47,8 +47,9 @@ void LaserGunProjectLab::dePacket() {
   uint8_t checkSum = data & 0xFF;
   uint8_t calChecksum = (~(id + damage)) & 0xFF;
 
-  if (calChecksum == checkSum && callback != NULL && (id < 8))
+  if (calChecksum == checkSum && callback != NULL && (id < 8)) {
     callback(id, damage);
+  }
 }
 
 bool LaserGunProjectLab::isReceiveIR() {
