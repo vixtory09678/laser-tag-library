@@ -39,7 +39,7 @@ bool LaserTagSimple::Armor::isReceiveIR() {
 
 // Gun functions
 
-void LaserTagSimple::Gun::shoot(uint32_t data) { IrSender.sendSony(data, 16); }
+void LaserTagSimple::Gun::fire(uint32_t data) { IrSender.sendSony(data, 16); }
 
 uint32_t LaserTagSimple::Gun::enPacket(uint8_t id, uint8_t damage) {
   id = (id > 7) ? (id % 8) : (id < 0) ? 0 : id;

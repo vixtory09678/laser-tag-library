@@ -16,7 +16,7 @@ enum TypeFunction { GUN, ARMOR };
 namespace LaserTagSimple {
 class Gun {
 public:
-  void shoot(uint32_t bullet);
+  void fire(uint32_t bullet);
   uint32_t enPacket(uint8_t id, uint8_t damage);
 };
 
